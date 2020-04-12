@@ -9,3 +9,14 @@ var config = {
   firebase.initializeApp(config);
   
   var database = firebase.database();
+
+// Add train button
+$("#train-btn").on("click", function(event) {
+    event.preventDefault();
+
+    var trainNm = $("#train-nm").val().trim();
+    var dest = $("#dst").val().trim();
+    var trainTime = moment($("#train-time").val().trim());
+    var frequency = $("#freq").val().trim();
+
+});
