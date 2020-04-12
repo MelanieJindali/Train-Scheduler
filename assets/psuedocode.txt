@@ -1,0 +1,15 @@
+1. Initialize Firebase
+    Data to hold train data:
+    - Train Name
+    - Destination
+    - First Train Time (military)
+    - Frequency (min)
+
+2. Create button that'll add a new train to the table
+
+3. Update the data in the database and update the html with new information
+
+4. Create a Firebase event for adding the new train to the database and new row to table 
+
+5. Create a code to calculate the next train's arrival
+    - Relative to the current time
