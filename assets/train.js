@@ -36,7 +36,6 @@ $("#train-nm").val("");
 $("#dst").val("");
 $("#train-time").val("");
 $("#freq").val("");
-
 });
 
 // Adding train to database
@@ -48,6 +47,21 @@ database.ref().on("chlid_added", function(childSnap) {
     var dest = childSnap.val().destination;
     var trainTime = childSnap.val().time;
     var frequency = childSnap.val().frequency;
+
+    console.log(trainNm);
+    console.log(dest);
+    console.log(trainTime);
+    console.log(frequency);
+
+// New rows
+var newRow = $("<tr>").append(
+    $("<td>").text(trainNm),
+    $("<td>").text(dest),
+    $("<td>").text(trainTime),
+    $("<td>").text(frequency)
+);
+
+$("#train-table > tbody").append(newRow);
 
 });
 
