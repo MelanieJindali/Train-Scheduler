@@ -1,3 +1,4 @@
+$(document).ready(function(){
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBYa2XCpWgYu1gootpW1J3VxzFO21_-cdA",
@@ -16,7 +17,21 @@ $("#train-btn").on("click", function(event) {
 
     var trainNm = $("#train-nm").val().trim();
     var dest = $("#dst").val().trim();
-    var trainTime = moment($("#train-time").val().trim());
+    var trainTime = moment($("#train-time").val().trim(), "HH:mm").format("X");
     var frequency = $("#freq").val().trim();
+
+// Holds train data
+var newTrain = {
+    name: trainNm,
+    destination: dest,
+    time: trainTime,
+    freq: frequency
+    };
+
+});
+
+
+
+database.ref().push(newTrain)
 
 });
