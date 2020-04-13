@@ -28,10 +28,16 @@ var newTrain = {
     freq: frequency
     };
 
+    database.ref().push(newTrain);
+    console.log(newTrain);
+
+// Clear text-boxes
+$("#train-nm").val("")
+$("#dst").val("")
+$("#train-time").val("")
+$("#freq").val("")
+
 });
 
-
-
-database.ref().push(newTrain)
 
 });
