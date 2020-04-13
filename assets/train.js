@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBYa2XCpWgYu1gootpW1J3VxzFO21_-cdA",
@@ -32,10 +32,22 @@ var newTrain = {
     console.log(newTrain);
 
 // Clear text-boxes
-$("#train-nm").val("")
-$("#dst").val("")
-$("#train-time").val("")
-$("#freq").val("")
+$("#train-nm").val("");
+$("#dst").val("");
+$("#train-time").val("");
+$("#freq").val("");
+
+});
+
+// Adding train to database
+database.ref().on("chlid_added", function(childSnap) {
+    console.log(childSnap.val());
+
+    // Store into variables
+    var trainNm = childSnap.val().name;
+    var dest = childSnap.val().destination;
+    var trainTime = childSnap.val().time;
+    var frequency = childSnap.val().frequency;
 
 });
 
