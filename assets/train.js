@@ -20,6 +20,18 @@ $("#train-btn").on("click", function(event) {
     var trainTime = moment($("#train-time").val().trim(), "HH:mm").format("X");
     var frequency = $("#freq").val().trim();
 
+    // New rows
+    var newRow = $("<tr>").append(
+    $("<td>").text(trainNm),
+    $("<td>").text(dest),
+    $("<td>").text(trainTime),
+    $("<td>").text(frequency)
+);
+
+$("#train-table > tbody").append(newRow);
+
+});
+
 // Holds train data
 var newTrain = {
     name: trainNm,
@@ -53,17 +65,7 @@ database.ref().on("chlid_added", function(childSnap) {
     console.log(trainTime);
     console.log(frequency);
 
-// New rows
-var newRow = $("<tr>").append(
-    $("<td>").text(trainNm),
-    $("<td>").text(dest),
-    $("<td>").text(trainTime),
-    $("<td>").text(frequency)
-);
 
-$("#train-table > tbody").append(newRow);
-
-});
 
 
 });
