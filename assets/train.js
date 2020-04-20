@@ -11,47 +11,60 @@ var config = {
   
   var database = firebase.database();
 
+
+    
+
 // Add train button
 $("#train-btn").on("click", function(event) {
     event.preventDefault();
 
+    // Capture values
     var trainNm = $("#train-nm").val().trim();
     var dest = $("#dst").val().trim();
-    var trainTime = moment($("#train-time").val().trim(), "HH:mm").format("X");
+    var trainTime = $("#train-time").val().trim();
     var frequency = $("#freq").val().trim();
+
+    // Convert time
+    var firstTrain = moment(trainTime, "HH:mm A");
+    // Current Time
+    var now = moment();
+    // Dif between times
+    var minArr = now.diff(firstTrain, 'minutes');
+    // Time apart - remainder
+    var lastMin = minArr % frequency;
+    // Min until train
+    var minAway = frequency - lastMin;
+    //Next Arrival
+    var nextArr = now.add(minAway, 'minutes');
+    // Format Arrival time
+    var arrTime = nextArr.format("HH:mm A");
+
 
     // New rows
     var newRow = $("<tr>").append(
     $("<td>").text(trainNm),
     $("<td>").text(dest),
-    $("<td>").text(trainTime),
-    $("<td>").text(frequency)
+    $("<td>").text(frequency),
+    $("<td>").text(arrTime),
+    $("<td>").text(minAway)
 );
 
 $("#train-table > tbody").append(newRow);
 
-});
+    // Holds train data
+    var newTrain = {
+        name: trainNm,
+        destination: dest,
+        time: trainTime,
+        freq: frequency
+        };
 
-// Holds train data
-var newTrain = {
-    name: trainNm,
-    destination: dest,
-    time: trainTime,
-    freq: frequency
-    };
 
     database.ref().push(newTrain);
     console.log(newTrain);
 
-// Clear text-boxes
-$("#train-nm").val("");
-$("#dst").val("");
-$("#train-time").val("");
-$("#freq").val("");
-});
-
-// Adding train to database
-database.ref().on("chlid_added", function(childSnap) {
+    // Adding train to database
+    database.ref().on("chlid_added", function(childSnap) {
     console.log(childSnap.val());
 
     // Store into variables
@@ -66,6 +79,13 @@ database.ref().on("chlid_added", function(childSnap) {
     console.log(frequency);
 
 
+// Clear text-boxes
+$("#train-nm").val("");
+$("#dst").val("");
+$("#train-time").val("");
+$("#freq").val("");
+});
 
+});
 
 });
